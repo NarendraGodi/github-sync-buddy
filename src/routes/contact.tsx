@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Github, Linkedin, Mail, Twitter, Send, Check } from "lucide-react";
+import { Linkedin, Mail, MapPin, Phone, Send, Check } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { SectionHeading } from "@/components/section-heading";
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/contact")({
       { title: `Contact — ${profile.name}` },
       {
         name: "description",
-        content: `Get in touch with ${profile.name}. Open to new projects, collaborations, and interesting conversations.`,
+        content: `Get in touch with ${profile.name}. Open to DevOps, GCP, and cloud architecture opportunities.`,
       },
       { property: "og:title", content: `Contact — ${profile.name}` },
       {
@@ -31,7 +31,6 @@ function ContactPage() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
-    // Local demo — wire to Lovable Cloud later for persistence + email.
     setTimeout(() => {
       setSubmitting(false);
       setSent(true);
@@ -46,24 +45,22 @@ function ContactPage() {
         <section className="mx-auto max-w-3xl px-4 py-16">
           <SectionHeading
             title="Contact"
-            description="The best way to reach me. I usually reply within a day or two."
+            description="I'm always interested in hearing about new projects and opportunities."
           />
 
           <div className="grid gap-8 md:grid-cols-[1fr_1.2fr]">
             <div className="space-y-3 font-mono text-sm">
               <a
+                href={`tel:${profile.phone.replace(/[^+0-9]/g, "")}`}
+                className="flex items-center gap-2 text-muted-foreground hover:text-primary"
+              >
+                <Phone className="h-4 w-4 text-primary" /> {profile.phone}
+              </a>
+              <a
                 href={`mailto:${profile.email}`}
                 className="flex items-center gap-2 text-muted-foreground hover:text-primary"
               >
                 <Mail className="h-4 w-4 text-primary" /> {profile.email}
-              </a>
-              <a
-                href={profile.social.github}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 text-muted-foreground hover:text-primary"
-              >
-                <Github className="h-4 w-4 text-primary" /> github
               </a>
               <a
                 href={profile.social.linkedin}
@@ -73,14 +70,9 @@ function ContactPage() {
               >
                 <Linkedin className="h-4 w-4 text-primary" /> linkedin
               </a>
-              <a
-                href={profile.social.x}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 text-muted-foreground hover:text-primary"
-              >
-                <Twitter className="h-4 w-4 text-primary" /> x / twitter
-              </a>
+              <p className="flex items-center gap-2 text-muted-foreground">
+                <MapPin className="h-4 w-4 text-primary" /> {profile.location}
+              </p>
             </div>
 
             <form
@@ -132,7 +124,8 @@ function ContactPage() {
                   </>
                 ) : (
                   <>
-                    <Send className="h-4 w-4" /> {submitting ? "Sending..." : "Send message"}
+                    <Send className="h-4 w-4" />{" "}
+                    {submitting ? "Sending..." : "Send message"}
                   </>
                 )}
               </button>

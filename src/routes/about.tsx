@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { SectionHeading } from "@/components/section-heading";
 import { profile } from "@/data/profile";
+import { achievements } from "@/data/achievements";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -10,7 +11,7 @@ export const Route = createFileRoute("/about")({
       { title: `About — ${profile.name}` },
       {
         name: "description",
-        content: `About ${profile.name}: ${profile.role} based in ${profile.location}. Background, skills, and what I'm working on.`,
+        content: `About ${profile.name}: ${profile.role}, based in ${profile.location}. ${profile.summary.slice(0, 120)}`,
       },
       { property: "og:title", content: `About — ${profile.name}` },
       {
@@ -34,17 +35,14 @@ function AboutPage() {
             description={`${profile.role} · ${profile.location}`}
           />
 
-          <div className="prose prose-invert max-w-none space-y-4 text-muted-foreground leading-relaxed">
-            {profile.bio.map((p, i) => (
-              <p key={i} className="text-base">
-                {p}
-              </p>
-            ))}
-          </div>
+          <p className="text-base text-muted-foreground leading-relaxed">
+            {profile.summary}
+          </p>
 
           <div className="mt-14">
             <h3 className="font-mono text-xs text-primary mb-4">
-              <span className="text-muted-foreground">~</span>{" > "}skills
+              <span className="text-muted-foreground">~</span>
+              {" > "}skills
             </h3>
             <div className="grid gap-4 sm:grid-cols-2">
               {Object.entries(profile.skills).map(([group, items]) => (
@@ -72,20 +70,42 @@ function AboutPage() {
 
           <div className="mt-14">
             <h3 className="font-mono text-xs text-primary mb-4">
-              <span className="text-muted-foreground">~</span>{" > "}timeline
+              <span className="text-muted-foreground">~</span>
+              {" > "}key_achievements
             </h3>
-            <ol className="border-l border-border pl-6 space-y-5">
-              {profile.timeline.map((t, i) => (
-                <li key={i} className="relative">
-                  <span className="absolute -left-[27px] top-1.5 h-2 w-2 rounded-full bg-primary ring-4 ring-background" />
-                  <p className="font-mono text-xs text-muted-foreground">
-                    {t.year}
-                  </p>
-                  <p className="text-foreground font-medium">{t.role}</p>
-                  <p className="text-sm text-muted-foreground">{t.org}</p>
-                </li>
+            <div className="space-y-6">
+              {achievements.map((a) => (
+                <div
+                  key={a.title}
+                  className="rounded-lg border border-border bg-card/60 p-5"
+                >
+                  <h4 className="font-semibold text-foreground border-l-2 border-primary pl-3">
+                    {a.title}
+                  </h4>
+                  <ul className="mt-3 space-y-2">
+                    {a.items.map((item, i) => {
+                      const isObj = typeof item === "object";
+                      const text = isObj ? item.text : item;
+                      const emphasis = isObj && item.emphasis;
+                      return (
+                        <li
+                          key={i}
+                          className="flex gap-3 text-sm text-muted-foreground before:content-['▸'] before:text-primary before:mt-0.5"
+                        >
+                          <span
+                            className={
+                              emphasis ? "text-foreground font-medium" : ""
+                            }
+                          >
+                            {text}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
               ))}
-            </ol>
+            </div>
           </div>
         </section>
       </main>

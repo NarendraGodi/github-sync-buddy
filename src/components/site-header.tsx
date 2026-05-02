@@ -6,7 +6,7 @@ import { profile } from "@/data/profile";
 
 const nav = [
   { to: "/", label: "home" },
-  { to: "/projects", label: "projects" },
+  { to: "/experience", label: "experience" },
   { to: "/about", label: "about" },
   { to: "/contact", label: "contact" },
 ] as const;

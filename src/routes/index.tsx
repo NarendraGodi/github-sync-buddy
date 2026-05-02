@@ -1,25 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Cloud, Container, GitBranch } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { SectionHeading } from "@/components/section-heading";
-import { ProjectCard } from "@/components/project-card";
 import { profile } from "@/data/profile";
-import { featuredProjects } from "@/data/projects";
+import { certifications } from "@/data/certifications";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: `${profile.name} — ${profile.role}` },
+      { title: `${profile.name} — DevOps Architect & GCP Specialist` },
       {
         name: "description",
-        content: `${profile.name} — ${profile.tagline} Portfolio of projects, writing, and open-source work.`,
-      },
-      { property: "og:title", content: `${profile.name} — ${profile.role}` },
-      {
-        property: "og:description",
         content: `${profile.name} — ${profile.tagline}`,
       },
+      {
+        property: "og:title",
+        content: `${profile.name} — DevOps Architect & GCP Specialist`,
+      },
+      { property: "og:description", content: profile.tagline },
     ],
   }),
   component: Index,
@@ -31,7 +30,8 @@ function Index() {
       <SiteHeader />
       <main className="flex-1">
         <Hero />
-        <FeaturedWork />
+        <Highlights />
+        <Certifications />
         <TechStrip />
       </main>
       <SiteFooter />
@@ -46,7 +46,7 @@ function Hero() {
         <div className="fade-in-up max-w-3xl">
           <p className="font-mono text-xs text-primary mb-4 inline-flex items-center gap-2 border border-primary/30 rounded-full px-3 py-1 bg-primary/5">
             <Sparkles className="h-3 w-3" />
-            available for new projects
+            11+ years · GCP & CKA certified
           </p>
 
           <h1 className="text-4xl sm:text-6xl font-bold tracking-tight">
@@ -56,16 +56,20 @@ function Hero() {
             <span className="cursor-blink">{profile.name}</span>
           </h1>
 
+          <p className="mt-4 font-mono text-sm text-primary">
+            {profile.role}
+          </p>
+
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl">
             {profile.tagline}
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
-              to="/projects"
+              to="/experience"
               className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity ring-glow"
             >
-              View work <ArrowRight className="h-4 w-4" />
+              View experience <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               to="/contact"
@@ -79,7 +83,9 @@ function Hero() {
             <p>
               <span className="text-primary">$</span> whoami
             </p>
-            <p className="pl-3">{profile.role}, based in {profile.location}.</p>
+            <p className="pl-3">
+              {profile.role.split(" | ")[0]}, based in {profile.location}.
+            </p>
           </div>
         </div>
       </div>
@@ -87,26 +93,75 @@ function Hero() {
   );
 }
 
-function FeaturedWork() {
+function Highlights() {
+  const icons = [Cloud, GitBranch, Container];
   return (
     <section className="border-t border-border/60 bg-background/40">
       <div className="mx-auto max-w-6xl px-4 py-20">
         <SectionHeading
-          title="Featured Work"
-          description="A few recent things I've shipped. See all projects for the full list."
+          title="Impact"
+          description="Measurable outcomes delivered across enterprise cloud programs."
         />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredProjects.map((p) => (
-            <ProjectCard key={p.slug} project={p} />
-          ))}
+        <div className="grid gap-4 sm:grid-cols-3">
+          {profile.highlights.map((h, i) => {
+            const Icon = icons[i] ?? Cloud;
+            return (
+              <div
+                key={h.label}
+                className="rounded-lg border border-border bg-card/60 p-6 hover:border-primary/60 transition-colors"
+              >
+                <Icon className="h-5 w-5 text-primary mb-4" />
+                <p className="text-3xl sm:text-4xl font-bold text-foreground">
+                  {h.metric}
+                </p>
+                <p className="mt-1 font-mono text-xs uppercase tracking-wider text-primary">
+                  {h.label}
+                </p>
+                <p className="mt-2 text-sm text-muted-foreground">{h.detail}</p>
+              </div>
+            );
+          })}
         </div>
         <div className="mt-8">
           <Link
-            to="/projects"
+            to="/experience"
             className="inline-flex items-center gap-1 font-mono text-sm text-primary hover:underline"
           >
-            cd ./projects <ArrowRight className="h-4 w-4" />
+            cd ./experience <ArrowRight className="h-4 w-4" />
           </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Certifications() {
+  return (
+    <section className="border-t border-border/60">
+      <div className="mx-auto max-w-6xl px-4 py-20">
+        <SectionHeading
+          title="Certifications"
+          description="Validated expertise from Google Cloud, CNCF, and AWS."
+        />
+        <div className="grid gap-6 sm:grid-cols-3">
+          {certifications.map((c) => (
+            <div
+              key={c.name}
+              className="rounded-lg border border-border bg-card/60 p-6 flex flex-col items-center text-center hover:border-primary/60 transition-colors"
+            >
+              <img
+                src={c.image}
+                alt={c.name}
+                className="h-32 w-32 object-contain"
+                loading="lazy"
+              />
+              <p className="mt-4 font-semibold text-foreground">{c.shortName}</p>
+              <p className="mt-1 text-xs text-muted-foreground">{c.name}</p>
+              <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-primary">
+                {c.issuer}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -115,20 +170,23 @@ function FeaturedWork() {
 
 function TechStrip() {
   const stack = [
-    "TypeScript",
-    "React",
-    "Node.js",
-    "Rust",
-    "Python",
-    "PostgreSQL",
-    "Docker",
+    "GCP",
     "AWS",
+    "Kubernetes",
+    "Terraform",
+    "Docker",
+    "Python",
+    "Ansible",
+    "TeamCity",
+    "Cloud Run",
+    "Stackdriver",
   ];
   return (
     <section className="border-t border-border/60">
       <div className="mx-auto max-w-6xl px-4 py-12">
         <p className="font-mono text-xs text-muted-foreground mb-4">
-          <span className="text-primary">~</span>{" > "}stack
+          <span className="text-primary">~</span>
+          {" > "}stack
         </p>
         <ul className="flex flex-wrap gap-2">
           {stack.map((s) => (

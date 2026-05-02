@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { Linkedin, Mail, Phone } from "lucide-react";
 import { profile } from "@/data/profile";
 
 export function SiteFooter() {
@@ -8,16 +8,7 @@ export function SiteFooter() {
         <p className="font-mono text-xs text-muted-foreground">
           <span className="text-primary">$</span> echo "© {new Date().getFullYear()} {profile.name}"
         </p>
-        <div className="flex items-center gap-3">
-          <a
-            href={profile.social.github}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="GitHub"
-            className="text-muted-foreground hover:text-primary transition-colors"
-          >
-            <Github className="h-4 w-4" />
-          </a>
+        <div className="flex items-center gap-4">
           <a
             href={profile.social.linkedin}
             target="_blank"
@@ -28,20 +19,18 @@ export function SiteFooter() {
             <Linkedin className="h-4 w-4" />
           </a>
           <a
-            href={profile.social.x}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="X / Twitter"
-            className="text-muted-foreground hover:text-primary transition-colors"
-          >
-            <Twitter className="h-4 w-4" />
-          </a>
-          <a
             href={`mailto:${profile.email}`}
             aria-label="Email"
             className="text-muted-foreground hover:text-primary transition-colors"
           >
             <Mail className="h-4 w-4" />
+          </a>
+          <a
+            href={`tel:${profile.phone.replace(/[^+0-9]/g, "")}`}
+            aria-label="Phone"
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
+            <Phone className="h-4 w-4" />
           </a>
         </div>
       </div>
