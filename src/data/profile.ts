@@ -9,7 +9,7 @@ export const profile = {
   email: "narendragodi@gmail.com",
   phone: "+91-9652415587",
   social: {
-    linkedin: "https://www.linkedin.com/in/NarendraGodi",
+    linkedin: "https://www.linkedin.com/in/narendragodi",
   },
   summary:
     "GCP and CKA Certified Delivery Project Lead with 11+ years of progressive experience in DevOps engineering, cloud infrastructure automation, and technical leadership. With 6+ years of specialized expertise in Google Cloud Platform and 3 years leading cross-functional teams, I've delivered enterprise-scale solutions that optimize costs, improve performance, and drive digital transformation.",
