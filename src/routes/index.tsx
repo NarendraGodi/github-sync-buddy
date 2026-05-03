@@ -163,7 +163,7 @@ function Certifications() {
                   aria-hidden
                   className="absolute inset-0 -m-1 rounded-full bg-primary/20 blur-md opacity-60 group-hover:opacity-100 transition-opacity"
                 />
-                <div className="relative flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full border-2 border-primary/50 bg-background p-2 shadow-[inset_0_0_12px_hsl(var(--primary)/0.25)] transition-transform group-hover:-translate-y-0.5">
+                <div className="relative flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full border border-primary/40 bg-background p-2 shadow-[inset_0_0_12px_hsl(var(--primary)/0.25)] transition-transform group-hover:-translate-y-0.5">
                   <img
                     src={c.image}
                     alt={c.name}
