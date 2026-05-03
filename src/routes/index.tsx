@@ -144,47 +144,25 @@ function Certifications() {
           description="Validated expertise from Google Cloud, CNCF, and AWS."
         />
 
-        {/* Medal bar — arranged like a service ribbon rack */}
-        <div className="flex justify-center">
-          <div
-            className="relative inline-flex items-end gap-5 sm:gap-8 rounded-md border border-border bg-card/60 px-6 sm:px-10 pt-6 pb-4 shadow-[0_0_30px_-10px_hsl(var(--primary)/0.4)]"
-            role="list"
-            aria-label="Certification medals"
-          >
-            {certifications.map((c) => (
-              <div
-                key={c.name}
-                role="listitem"
-                className="group flex flex-col items-center"
-              >
-                {/* Ribbon */}
-                <span
-                  aria-hidden
-                  className="h-3 w-14 rounded-sm bg-gradient-to-b from-primary/80 to-primary/40 shadow-sm"
-                />
-                {/* Medal */}
-                <div className="relative -mt-0.5">
-                  <span
-                    aria-hidden
-                    className="absolute inset-0 -m-1 rounded-full bg-primary/10 blur-md opacity-0 group-hover:opacity-100 transition-opacity"
-                  />
-                  <div className="relative flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full border border-primary/40 bg-background p-1.5 shadow-inner transition-transform group-hover:-translate-y-0.5">
-                    <img
-                      src={c.image}
-                      alt={c.name}
-                      title={`${c.shortName} — ${c.issuer}`}
-                      className="h-full w-full object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
-                <p className="mt-2 font-mono text-[10px] uppercase tracking-wider text-muted-foreground group-hover:text-primary transition-colors">
-                  {c.shortName}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Medals — left-aligned, Font Awesome icons */}
+        <ul
+          className="flex flex-wrap items-start gap-10 sm:gap-12"
+          aria-label="Certification medals"
+        >
+          {certifications.map((c) => (
+            <li key={c.name} className="group flex flex-col items-center">
+              <i
+                className="fa-thin fa-solid fa-medal text-5xl sm:text-6xl text-primary transition-transform group-hover:-translate-y-0.5"
+                style={{ filter: "drop-shadow(0 0 12px hsl(var(--primary) / 0.45))" }}
+                aria-hidden="true"
+                title={`${c.shortName} — ${c.issuer}`}
+              />
+              <p className="mt-3 font-mono text-[10px] uppercase tracking-wider text-muted-foreground group-hover:text-primary transition-colors">
+                {c.shortName}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

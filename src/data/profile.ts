@@ -25,7 +25,7 @@ export const profile = {
       detail: "Reduced OS Login calls from 456M to 30M weekly",
     },
     {
-      metric: "100+",
+      metric: "20+",
       label: "Projects",
       detail: "Architected and deployed at enterprise scale",
     },
