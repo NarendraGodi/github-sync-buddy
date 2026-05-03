@@ -62,6 +62,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <MatrixRain />
         {children}
         <Scripts />
       </body>
