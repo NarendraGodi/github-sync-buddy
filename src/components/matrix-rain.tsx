@@ -1,0 +1,73 @@
+import { useEffect, useRef } from "react";
+
+export function MatrixRain() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const setSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    setSize();
+
+    const katakana =
+      "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン";
+    const latin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const nums = "0123456789";
+    const alphabet = katakana + latin + nums;
+
+    const fontSize = 16;
+    let columns = Math.floor(canvas.width / fontSize);
+    let rainDrops: number[] = Array.from({ length: columns }, () => 1);
+
+    const draw = () => {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#0F0";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < rainDrops.length; i++) {
+        const text = alphabet.charAt(
+          Math.floor(Math.random() * alphabet.length),
+        );
+        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+        if (
+          rainDrops[i] * fontSize > canvas.height &&
+          Math.random() > 0.975
+        ) {
+          rainDrops[i] = 0;
+        }
+        rainDrops[i]++;
+      }
+    };
+
+    const interval = window.setInterval(draw, 30);
+
+    const onResize = () => {
+      setSize();
+      columns = Math.floor(canvas.width / fontSize);
+      rainDrops = Array.from({ length: columns }, () => 1);
+    };
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.clearInterval(interval);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden
+      className="fixed inset-0 -z-10 h-screen w-screen pointer-events-none opacity-20"
+    />
+  );
+}
