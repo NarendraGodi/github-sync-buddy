@@ -144,20 +144,36 @@ function Certifications() {
           description="Validated expertise from Google Cloud, CNCF, and AWS."
         />
 
-        {/* Medals — left-aligned, Font Awesome icons */}
+        {/* Medals — left-aligned, badge images hanging from ribbons */}
         <ul
-          className="flex flex-wrap items-start gap-10 sm:gap-12"
+          className="flex flex-wrap items-start gap-8 sm:gap-12"
           aria-label="Certification medals"
         >
           {certifications.map((c) => (
-            <li key={c.name} className="group flex flex-col items-center">
-              <i
-                className="fa-thin fa-solid fa-medal text-5xl sm:text-6xl text-primary transition-transform group-hover:-translate-y-0.5"
-                style={{ filter: "drop-shadow(0 0 12px hsl(var(--primary) / 0.45))" }}
-                aria-hidden="true"
-                title={`${c.shortName} — ${c.issuer}`}
+            <li key={c.name} className="group flex flex-col items-center w-24 sm:w-28">
+              {/* Ribbon (trapezoid) */}
+              <span
+                aria-hidden
+                className="block h-8 w-10 bg-gradient-to-b from-primary/80 to-primary/30 shadow-sm"
+                style={{ clipPath: "polygon(0 0, 100% 0, 80% 100%, 20% 100%)" }}
               />
-              <p className="mt-3 font-mono text-[10px] uppercase tracking-wider text-muted-foreground group-hover:text-primary transition-colors">
+              {/* Medal */}
+              <div className="relative -mt-1">
+                <span
+                  aria-hidden
+                  className="absolute inset-0 -m-1 rounded-full bg-primary/20 blur-md opacity-60 group-hover:opacity-100 transition-opacity"
+                />
+                <div className="relative flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full border-2 border-primary/50 bg-background p-2 shadow-[inset_0_0_12px_hsl(var(--primary)/0.25)] transition-transform group-hover:-translate-y-0.5">
+                  <img
+                    src={c.image}
+                    alt={c.name}
+                    title={`${c.shortName} — ${c.issuer}`}
+                    className="h-full w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <p className="mt-3 font-mono text-[10px] uppercase tracking-wider text-center text-muted-foreground group-hover:text-primary transition-colors">
                 {c.shortName}
               </p>
             </li>
