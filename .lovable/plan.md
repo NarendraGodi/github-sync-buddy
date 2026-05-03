@@ -1,48 +1,28 @@
-## Developer Portfolio — Plan
+## Changes
 
-A dark, techy multi-page portfolio built fresh in Lovable. Once this is scaffolded, you'll connect it to a new GitHub repo via **Connectors → GitHub** and we can start porting your old HTML/CSS content piece by piece (paste into chat, and I'll wire it in).
+### 1. `src/data/profile.ts`
+- Change the "Projects" highlight metric from `100+` to `20+`.
 
-### Pages (each its own route for SEO + shareability)
+### 2. `src/routes/__root.tsx`
+- Add Font Awesome Pro **thin** stylesheet `<link>` in the root `head()` so `fa-thin fa-medal` renders. Note: `fa-thin` is a Font Awesome **Pro** style — the free CDN doesn't include it. We'll load Pro from a kit if you have one, otherwise fall back to `fa-light` (free alternative via Font Awesome 6 free CDN doesn't include light/thin either). Realistic free option: use **Font Awesome 6 Free** with `fa-solid fa-medal`. I'll wire `fa-thin` as requested but include a note that it requires a Pro Kit URL — you can paste your kit code and I'll swap it in. Default fallback: `fa-solid fa-medal` from the free CDN so the icon shows out of the box.
 
-- **/ (Home)** — Hero with name, tagline, primary CTA (View work / Get in touch). Short intro, featured projects (3), tech stack strip, footer.
-- **/about** — Longer bio, background, what you're working on, skills grid, optional timeline.
-- **/projects** — Full grid of projects with filter chips (e.g. Web, AI, Open Source). Each card: thumbnail, title, summary, tech tags, links to live site + GitHub.
-- **/projects/$slug** — Per-project case study: problem, solution, screenshots, tech, lessons learned, links.
-- **/blog** *(optional, included as empty-ready)* — List of posts. Markdown-friendly structure for later.
-- **/contact** — Email link, social icons (GitHub, LinkedIn, X), simple contact form (saves to Lovable Cloud, optional email notification).
+### 3. `src/routes/index.tsx` — `Certifications` section
+- Remove the centered ribbon-rack container.
+- Left-align: replace `flex justify-center` + the bordered card with a left-aligned horizontal row directly under the section heading.
+- Replace each `<img>` badge with a Font Awesome medal icon: `<i class="fa-thin fa-medal" />` (with solid fallback), sized large (~text-5xl), colored with the primary accent, with a subtle glow.
+- Keep the small monospace caption (`shortName`) under each medal.
+- Layout: `flex flex-wrap items-start gap-10` aligned to the start of the container — no centered card, no ribbons, no image frames.
 
-### Look & feel — "Dark & techy"
+### Question for you
+Do you have a **Font Awesome Pro Kit** code? `fa-thin` only ships with Pro. Options:
+- **A:** You give me your kit URL → I wire `fa-thin fa-medal` exactly as requested.
+- **B:** Use free `fa-solid fa-medal` from the free CDN now (works immediately), swap to thin later.
 
-- Near-black background (`#0a0a0b`), high-contrast off-white text, single accent color (suggesting electric green `#39ff14` or cyber cyan — we can pick once you see it).
-- Monospace accents (JetBrains Mono) for labels, code, project tags. Sans-serif (Inter) for body.
-- Subtle terminal-style flourishes: blinking cursor in hero, `>` prompt prefixes on section headings, faint grid background.
-- Smooth fade/slide animations on scroll. No heavy 3D or particles by default.
-- Fully responsive, mobile-first.
+I'll proceed with **B** as the default unless you tell me otherwise — the markup will still be FA medal icons, just the solid weight.
 
-### Functionality
+### Files touched
+- `src/data/profile.ts` (1 line)
+- `src/routes/__root.tsx` (add FA stylesheet link)
+- `src/routes/index.tsx` (rewrite `Certifications` component)
 
-- **Navigation**: sticky top header with route links (Home, Projects, About, Contact). Active route highlighted.
-- **Theme**: dark by default. (Light mode can be added later if you want it.)
-- **Contact form**: stored in Lovable Cloud database; you'll see submissions in the Cloud dashboard.
-- **SEO**: per-route titles, descriptions, and OG tags so each page shares cleanly.
-- **Project data**: starts as a typed array in code (easy to edit). Can move to Cloud DB later if you want to manage from a dashboard.
-
-### Content I'll seed (you'll replace as we go)
-
-Placeholder name, tagline, 3 sample projects, and bio text — all clearly marked so you can swap in your real content from your existing site.
-
-### After scaffolding — recommended next steps
-
-1. Tell me your name, tagline, and one real project to swap into the homepage.
-2. Connect GitHub: **Connectors → GitHub → Connect project → Create Repository**.
-3. Paste content from your old HTML site section by section; I'll port it into the right routes.
-4. Add real images (drag into chat).
-5. Publish via the **Publish** button (top right).
-
-### Technical notes
-
-- Stack: React 19, TanStack Start, Tailwind v4, shadcn/ui, Lovable Cloud (for contact form storage).
-- File-based routes under `src/routes/` (`index.tsx`, `about.tsx`, `projects.tsx`, `projects.$slug.tsx`, `contact.tsx`, optional `blog.tsx`).
-- Design tokens defined in `src/styles.css` (semantic HSL variables for bg, fg, accent, muted, border).
-- Project data in `src/data/projects.ts` as a typed array.
-- Contact submissions table in Lovable Cloud with RLS (insert-only for anon, read for you).
+No new dependencies; FA loaded via CDN `<link>`.
