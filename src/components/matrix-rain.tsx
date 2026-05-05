@@ -25,11 +25,17 @@ export function MatrixRain() {
     let columns = Math.floor(canvas.width / fontSize);
     let rainDrops: number[] = Array.from({ length: columns }, () => 1);
 
+    const startTime = performance.now();
+    const glowDuration = 2000; // bright glow only for first 2s
+
     const draw = () => {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.font = fontSize + "px monospace";
+
+      const elapsed = performance.now() - startTime;
+      const glow = Math.max(0, 1 - elapsed / glowDuration);
 
       for (let i = 0; i < rainDrops.length; i++) {
         const text = alphabet.charAt(
@@ -38,16 +44,14 @@ export function MatrixRain() {
         const x = i * fontSize;
         const y = rainDrops[i] * fontSize;
 
-        // Bright leading character with glow
-        ctx.shadowColor = "#9FFF9F";
-        ctx.shadowBlur = 12;
-        ctx.fillStyle = "#CCFFCC";
-        ctx.fillText(text, x, y);
-
-        // Trailing character in standard matrix green
-        ctx.shadowBlur = 0;
+        if (glow > 0) {
+          ctx.shadowColor = "#9FFF9F";
+          ctx.shadowBlur = 12 * glow;
+        } else {
+          ctx.shadowBlur = 0;
+        }
         ctx.fillStyle = "#0F0";
-        ctx.fillText(text, x, y - fontSize);
+        ctx.fillText(text, x, y);
 
         if (y > canvas.height && Math.random() > 0.975) {
           rainDrops[i] = 0;
