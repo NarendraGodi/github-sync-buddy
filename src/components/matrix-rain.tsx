@@ -16,9 +16,9 @@ export function MatrixRain() {
     setSize();
 
     const katakana =
-      "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン";
-    const latin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const nums = "0123456789";
+      "インド、テランガーナ州ハイデラバードを拠点とするクラウドDevOpsアーキテクト。";
+    const latin = "CLOUD DEVOPS ENGINEER";
+    const nums = "365307246060";
     const alphabet = katakana + latin + nums;
 
     const fontSize = 16;
@@ -29,19 +29,27 @@ export function MatrixRain() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#0F0";
       ctx.font = fontSize + "px monospace";
 
       for (let i = 0; i < rainDrops.length; i++) {
         const text = alphabet.charAt(
           Math.floor(Math.random() * alphabet.length),
         );
-        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+        const x = i * fontSize;
+        const y = rainDrops[i] * fontSize;
 
-        if (
-          rainDrops[i] * fontSize > canvas.height &&
-          Math.random() > 0.975
-        ) {
+        // Bright leading character with glow
+        ctx.shadowColor = "#9FFF9F";
+        ctx.shadowBlur = 12;
+        ctx.fillStyle = "#CCFFCC";
+        ctx.fillText(text, x, y);
+
+        // Trailing character in standard matrix green
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = "#0F0";
+        ctx.fillText(text, x, y - fontSize);
+
+        if (y > canvas.height && Math.random() > 0.975) {
           rainDrops[i] = 0;
         }
         rainDrops[i]++;
