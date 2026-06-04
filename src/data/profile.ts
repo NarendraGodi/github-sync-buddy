@@ -49,5 +49,14 @@ export const profile = {
       "Production Issue Resolution",
       "Cloud Infrastructure Optimization",
     ],
+    "AI DevOps & Automation": [
+      "AI-led DevOps Transformation",
+      "TeamCity MCP Server",
+      "Contextual AI Interactions",
+      "Google Cloud Workflows",
+      "AI Agents & Process Automation",
+      "Pipeline Orchestration",
+      "Intelligent Monitoring",
+    ],
   },
 };
