@@ -34,6 +34,9 @@ export const experiences: Experience[] = [
       "Implementing best practices for cloud infrastructure and CI/CD",
       "Coaching team members on Agile methodologies and kanban alignment",
       "Removing technical roadblocks and facilitating onboarding processes",
+      "Authored multiple System Architecture Documents (SADs) to align business and technical requirements for migration and deployment",
+      "Created Load Balancers with Network Endpoint Groups (NEGs) for scalable and efficient OMS routing",
+      "Collaborated with onshore/offshore support teams to resolve production issues and optimize cloud infrastructure",
     ],
   },
   {

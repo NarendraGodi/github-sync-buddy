@@ -41,5 +41,13 @@ export const profile = {
       "Agile Coaching",
       "Incident Response",
     ],
+    "Architecture & Leadership": [
+      "System Architecture Documents (SADs)",
+      "Load Balancers with NEGs",
+      "OMS Routing",
+      "Onshore/Offshore Collaboration",
+      "Production Issue Resolution",
+      "Cloud Infrastructure Optimization",
+    ],
   },
 };
