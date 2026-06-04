@@ -32,6 +32,7 @@ function Index() {
         <Hero />
         <Highlights />
         <Certifications />
+        <KeyAchievements />
         <TechStrip />
       </main>
       <SiteFooter />
