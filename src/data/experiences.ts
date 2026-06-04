@@ -37,6 +37,9 @@ export const experiences: Experience[] = [
       "Authored multiple System Architecture Documents (SADs) to align business and technical requirements for migration and deployment",
       "Created Load Balancers with Network Endpoint Groups (NEGs) for scalable and efficient OMS routing",
       "Collaborated with onshore/offshore support teams to resolve production issues and optimize cloud infrastructure",
+      "Acted as a major contributor to AI-led DevOps transformation, integrating intelligent automation into existing CI/CD ecosystems",
+      "Engineered a TeamCity MCP server to enable contextual AI interactions and smarter pipeline orchestration",
+      "Developed scalable AI agents for Google Cloud Workflows, improving process automation, monitoring, and execution consistency",
     ],
   },
   {
