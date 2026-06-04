@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, Cloud, Container, GitBranch } from "lucide-react";
+import { ArrowRight, Sparkles, Cloud, Container, GitBranch, Bot, Cpu, Workflow } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { SectionHeading } from "@/components/section-heading";
