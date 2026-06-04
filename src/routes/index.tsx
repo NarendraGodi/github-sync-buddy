@@ -219,3 +219,40 @@ function TechStrip() {
     </section>
   );
 }
+
+function KeyAchievements() {
+  const icons = [Bot, Cpu, Workflow];
+  return (
+    <section className="border-t border-border/60 bg-background/40">
+      <div className="mx-auto max-w-6xl px-4 py-20">
+        <SectionHeading
+          title="Key Achievements"
+          description="AI-led DevOps transformation and intelligent automation milestones."
+        />
+        <div className="space-y-6">
+          {profile.keyAchievements.map((achievement) => (
+            <div
+              key={achievement.title}
+              className="rounded-lg border border-border bg-card/60 p-6 hover:border-primary/60 transition-colors"
+            >
+              <h3 className="font-mono text-sm uppercase tracking-wider text-primary mb-4">
+                {achievement.title}
+              </h3>
+              <ul className="space-y-3">
+                {achievement.bullets.map((bullet, i) => {
+                  const Icon = icons[i] ?? Bot;
+                  return (
+                    <li key={i} className="flex items-start gap-3">
+                      <Icon className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                      <p className="text-sm text-muted-foreground">{bullet}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
