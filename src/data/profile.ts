@@ -59,4 +59,14 @@ export const profile = {
       "Intelligent Monitoring",
     ],
   },
+  keyAchievements: [
+    {
+      title: "AI DevOps Contributions & Automation",
+      bullets: [
+        "Acted as a major contributor to AI-led DevOps transformation, integrating intelligent automation into existing CI/CD ecosystems.",
+        "Engineered a TeamCity MCP server to enable contextual AI interactions and smarter pipeline orchestration.",
+        "Developed scalable AI agents for Google Cloud Workflows, improving process automation, monitoring, and execution consistency.",
+      ],
+    },
+  ],
 };
